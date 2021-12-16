@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 from scipy.stats import norm, truncnorm
 from tqdm import tqdm
@@ -6,6 +8,8 @@ import matplotlib.pyplot as plt
 def plot(l,e):
     l_avg=np.mean(l,axis=0)
     e_avg=np.mean(e,axis=0)
+    print(e_avg[-1])
+    print(l_avg[-1])
     samples=range(0,1000)
     plt.plot(samples, l_avg, label='lambda algorithm ',color='g')
     plt.plot(samples, e_avg, label='eta algorithm ',color='b')
@@ -59,6 +63,8 @@ def k_1_search():
     total_lambda=[]
     total_eta=[]
     for s in range(seed_number):
+        random.seed(seed_number)
+        np.random.seed(seed_number)
         dists = create_dists()
         lambda_results=[]
         eta_results=[]
@@ -80,9 +86,8 @@ def k_1_search():
 
 if __name__ == "__main__":
     dist_number=100
-    k=1
-    mean_range=15
-    std_range=3
+    mean_range=10
+    std_range=1
     samples_number=1000
     seed_number=5
     total_lambda,total_eta=k_1_search()
